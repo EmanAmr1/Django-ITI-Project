@@ -1,0 +1,15 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+ 
+}
+
+th, td {
+    border: 5px solid #eee;
+    padding: 8px;
+    text-align: left;
+    max-width: 200px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

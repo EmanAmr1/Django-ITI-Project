@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Project{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 15px;
+            overflow: hidden;
+            background-color: #3498db;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="{% url 'product_list' %}">Product</a></li>
+        <li><a href="{% url 'category_list' %}">Category</a></li>
+        <li><a href="{% url 'aboutus_list' %}">About Us</a></li>
+    </ul>
+    {% block content %}{% endblock %}
+</body>
+</html>

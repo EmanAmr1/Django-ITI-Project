@@ -1,0 +1,52 @@
+
+{% extends 'homedir/index.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>products list</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+
+<style>
+   
+</style>
+
+
+<body>
+    
+    
+    {% if myproductslist %}
+        <table border="5px">
+            <thead >
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in myproductslist %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td><img src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>
+                        
+                        <td ><a href="{% url 'product.detailes' product.id%}">Show details</a> </td>
+                       
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+    
+</body>
+</html>
+{% endblock %}
