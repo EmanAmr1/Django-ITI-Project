@@ -13,13 +13,29 @@
 </head>
 
 <style>
-   
+  .add {
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: black;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 9%;
+}
+
+.all{
+
+    margin: 20px;
+    margin-left: 130px;
+}
 </style>
+
 
 
 <body>
     
-    
+   <div class="all"><a class="add" href="{%url 'product.add'%}">New Product</a></div> 
     {% if myproductslist %}
         <table border="5px">
             <thead >
@@ -37,7 +53,11 @@
                         <td>{{ product.name }}</td>
                         <td><img src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>
                         
-                        <td ><a href="{% url 'product.detailes' product.id%}">Show details</a> </td>
+                        <td ><a href="{% url 'product.detailes' product.id%}">Show details</a>
+                            <a href="{% url 'product.delete' product.id%}">Delete</a>
+                            <a href="{% url 'product.detailes' product.id%}">Update</a>
+                        
+                        </td>
                        
                     </tr>
                 {% endfor %}
