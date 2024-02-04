@@ -57,6 +57,14 @@ form {
             <label for="email"> Image:</label>
             <input type="file" id="text" name="pimage">
 
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for cat_id, cat_name in getcategory %}
+                    <option value="{{ cat_id }}">{{ cat_name }}</option>
+                {% endfor %}
+            </select>
+        
+
 
             <button type="submit">Add Product</button>
         </form>

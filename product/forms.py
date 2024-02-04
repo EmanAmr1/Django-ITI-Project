@@ -2,11 +2,13 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Product
+from category.models import *
 
 class ProductForm(forms.Form):
     name = forms.CharField(min_length=3, required=True)
     image = forms.ImageField(required=False)
-
+    category = forms.ChoiceField(choices=Category.getcategory())
+    
     def clean_name(self):
         user_entered_name = self.cleaned_data['name']
 
@@ -16,7 +18,17 @@ class ProductForm(forms.Form):
 
         return user_entered_name
     
-
+    def save(self, commit=True):
+        
+        if commit:
+            # Perform the save operation, for example, creating a new Product instance
+            product = Product.objects.create(
+                name=self.cleaned_data['name'],
+                image=self.cleaned_data['image'],
+                category_id=self.cleaned_data['category']
+            )
+            return product
+        return None 
 
 
 

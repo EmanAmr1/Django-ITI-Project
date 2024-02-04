@@ -44,6 +44,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Image</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -53,7 +54,7 @@
                 <td>{{ product.id }}</td>
                 <td>{{ product.name }}</td>
                 <td> <img src="{{product.getimageurl}}"></td>
-
+                <td>{{ product.category.name }}</td>
                 <!--<td> <img   src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>-->
 
                 <td><a href="{% url 'product.detailes' product.id%}">Show details</a>

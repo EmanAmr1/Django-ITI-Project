@@ -4,6 +4,7 @@ from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
+from category.models import *
 
 myproductslist = [
 
@@ -22,6 +23,7 @@ def productlist(request):
     # return HttpResponse(myproductslist)
     context = {'myproductslist': Product.objects.all()}  # from db
     # context = {'myproductslist': myproductslist}
+    
     return render(request, 'productdir/index.html', context)
 
 
@@ -61,11 +63,13 @@ def productdetailes(request, proid):
 def addpro(request):
     if (request.method == 'POST'):
         Product.objects.create(
-            name=request.POST['pname'], image=request.FILES['pimage'])
+            name=request.POST['pname'], image=request.FILES['pimage'],
+            category=Category.objects.get(id=request.POST['category']))
         # return HttpResponseRedirect('/products/list')
         r = reverse("product_list")
         return HttpResponseRedirect(r)
-    return render(request, 'productdir/proaddhtml.html')
+    #context={"cate":Category.objects.all()}
+    return render(request, 'productdir/proaddhtml.html',{'getcategory': Category.getcategory()})
 
 
 def deletepro(request, proid):
@@ -133,7 +137,7 @@ def addFormpro(request):
 '''
 
 
-def addFormpro(request):
+def addFormproo(request):
     form = ProductForm()
     context = {"form": form}
 
@@ -142,11 +146,32 @@ def addFormpro(request):
         if form.is_valid():
             Product.objects.create(
                 name=form.cleaned_data['name'],
-                image=form.cleaned_data['image']
+                image=form.cleaned_data['image'],
+                category=form.cleaned_data['category']
             )
             r = reverse("product_list")
             return HttpResponseRedirect(r)
         else:
             context['msg'] = "name must be unique"
 
+    return render(request, 'productdir/proaddForm.html',context,{'getcategory': Category.getcategory()})
+
+
+def addFormpro(request):
+    context = {}
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            r = reverse("product_list")
+            return HttpResponseRedirect(r)
+        else:
+            context['form'] = form
+            context['msg'] = "Name must be unique"
+    else:
+        form = ProductForm()
+        context['form'] = form
+
+    context['getcategory'] = Category.getcategory()
     return render(request, 'productdir/proaddForm.html', context)
