@@ -54,6 +54,11 @@
             border-radius: 5px;
             margin-bottom: 20px;
         }
+
+        .myimg{
+            width: 50%;
+            height: 50%;
+        }
     </style>
 </head>
 <body>
@@ -63,7 +68,8 @@
             <p>ID: {{ catgo.id }}</p>
             <p>Name: {{ catgo.name }}</p>
         </div>
-        <img src="{% static catgo.image %}" alt="{{ catgo.name }} Image">
+        <img class="myimg" src="{{catgo.getimageurl}}" alt="{{ catego.name }}  Image">
+        <!--<img src="{% static catgo.image %}" alt="{{ catgo.name }} Image">-->
     </div>
 </body>
 </html>

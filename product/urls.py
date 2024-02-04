@@ -9,4 +9,6 @@ urlpatterns = [
     path('<int:proid>',views.productdetailes,name="product.detailes"),
     path('new',views.addpro,name="product.add"),
     path('delete/<int:proid>',views.deletepro,name="product.delete"),
+    path('update/<int:proid>',views.updatepro,name="product.update"),
+    path('newForm',views.addFormpro,name="product.addForm"),
 ]

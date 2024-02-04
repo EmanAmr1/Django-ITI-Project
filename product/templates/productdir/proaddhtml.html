@@ -49,14 +49,13 @@ form {
 
     <section>
        
-        <form method="post">
+        <form method="post"    enctype="multipart/form-data">
             {% csrf_token %}
             <label for="name"> Name:</label>
             <input type="text" id="name" name="pname" required>
 
             <label for="email"> Image:</label>
-            <input type="text" id="text" name="pimage">
-
+            <input type="file" id="text" name="pimage">
 
 
             <button type="submit">Add Product</button>

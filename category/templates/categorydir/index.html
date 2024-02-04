@@ -30,7 +30,8 @@
   }
   </style>
 <body>
-    <div class="all"><a class="add" href="{%url 'category.add'%}">New Product</a></div> 
+    <div class="all"><a class="add" href="{%url 'category.add'%}">New category</a></div> 
+    <div class="all"><a class="add" href="{%url 'category.addForm'%}">New addForm Product</a></div>
     
     {% if mycategorylist %}
     <table border="5">
@@ -47,10 +48,11 @@
                 <tr>
                     <td>{{ cat.id }}</td>
                     <td>{{ cat.name }}</td>
-                    <td><img src="{% static cat.image %}" alt="{{ cat.name }} Image" width="100"></td>
+                    <td> <img src="{{cat.getimageurl}}"></td>
+                    <!--<td><img src="{% static cat.image %}" alt="{{ cat.name }} Image" width="100"></td>-->
                     <td ><a href="{% url 'category.detailes' cat.id%}">Show details</a>
                         <a href="{% url 'category.delete' cat.id%}">Delete</a>
-                        
+                        <a href="{% url 'category.update' cat.id%}">update</a>
                     
                     </td>
                 </tr>

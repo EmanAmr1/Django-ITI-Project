@@ -1,10 +1,10 @@
-
 {% extends 'homedir/index.html' %}
 {% load static %}
 
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,60 +13,64 @@
 </head>
 
 <style>
-  .add {
-    display: block;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: black;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    width: 9%;
-}
+    .add {
+        display: block;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color: black;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        width: 9%;
+    }
 
-.all{
+    .all {
 
-    margin: 20px;
-    margin-left: 130px;
-}
+        margin: 20px;
+        margin-left: 130px;
+    }
 </style>
 
 
 
 <body>
-    
-   <div class="all"><a class="add" href="{%url 'product.add'%}">New Product</a></div> 
+
+    <div class="all"><a class="add" href="{%url 'product.add'%}">New Product</a></div>
+    <div class="all"><a class="add" href="{%url 'product.addForm'%}">New addForm Product</a></div>
     {% if myproductslist %}
-        <table border="5px">
-            <thead >
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in myproductslist %}
-                    <tr>
-                        <td>{{ product.id }}</td>
-                        <td>{{ product.name }}</td>
-                        <td><img src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>
-                        
-                        <td ><a href="{% url 'product.detailes' product.id%}">Show details</a>
-                            <a href="{% url 'product.delete' product.id%}">Delete</a>
-                            <a href="{% url 'product.detailes' product.id%}">Update</a>
-                        
-                        </td>
-                       
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <table border="5px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in myproductslist %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td> <img src="{{product.getimageurl}}"></td>
+
+                <!--<td> <img   src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>-->
+
+                <td><a href="{% url 'product.detailes' product.id%}">Show details</a>
+                    <a href="{% url 'product.delete' product.id%}">Delete</a>
+                    <a href="{% url 'product.update' product.id%}">Update</a>
+
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     {% else %}
-        <p>No products available.</p>
+    <p>No products available.</p>
     {% endif %}
-    
+
 </body>
+
 </html>
 {% endblock %}
