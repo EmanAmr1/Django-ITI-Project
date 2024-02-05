@@ -10,4 +10,5 @@ urlpatterns = [
     path('delete/<int:catid>', views.deletecat, name="category.delete"),
     path('update/<int:catid>',views.updatecat,name="category.update"),
     path('newForm',views.addFormcat,name="category.addForm"),
+    path('newMetaForm',views.addMetaFormcat,name="category.addMetaForm"),
 ]

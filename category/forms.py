@@ -14,3 +14,9 @@ class CategoryForm(forms.Form):
             raise ValidationError("Name must be unique")
 
         return user_entered_name
+    
+class CategoryMetaForm(forms.ModelForm):
+    class Meta:
+        model=Category
+        fields=['name','image']
+        

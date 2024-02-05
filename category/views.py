@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, redirect, reverse
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
@@ -73,6 +73,7 @@ def deletecat(request, catid):
     r = reverse("category_list")
     return HttpResponseRedirect(r)
 
+
 '''
 def updatecat(request, catid):
     cat = Category.objects.get(id=catid)
@@ -131,3 +132,14 @@ def addFormcat(request):
             context['msg'] = "name must be unique"
 
     return render(request, 'categorydir/cataddForm.html', context)
+
+
+def addMetaFormcat(request):
+    metaform = CategoryMetaForm()
+    context = {'metaform': metaform}
+    if (request.method == 'POST'):
+        metaform = CategoryMetaForm(request.POST, request.FILES)
+        if (metaform.is_valid()):
+            metaform.save()
+            return redirect(reverse("category_list"))
+    return render(request, 'categorydir/cataddMetaForm.html', context)
