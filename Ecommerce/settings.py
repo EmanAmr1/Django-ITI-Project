@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'category.apps.CategoryConfig',
     'home.apps.HomeConfig',
-    'aboutus.apps.AboutusConfig'
+    'aboutus.apps.AboutusConfig',
+    'accounts.apps.AccountsConfig'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = "Ecommerce.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'templates/'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

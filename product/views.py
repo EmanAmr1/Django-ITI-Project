@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
 from category.models import *
+from django.contrib.auth.decorators import login_required
 
 myproductslist = [
 
@@ -62,6 +63,7 @@ def productdetailes(request, proid):
     return render(request, 'productdir/prodetaileshtml.html', context)
 
 
+@login_required
 def addpro(request):
     if (request.method == 'POST'):
         Product.objects.create(
@@ -74,6 +76,7 @@ def addpro(request):
     return render(request, 'productdir/proaddhtml.html',{'getcategory': Category.getcategory()})
 
 
+@login_required
 def deletepro(request, proid):
     Product.objects.filter(id=proid).delete()
     r = reverse("product_list")
@@ -97,7 +100,7 @@ def updatepro(request, proid):
     return render(request, 'productdir/proupdate.html', context)
 '''
 
-
+@login_required
 def updatepro(request, proid):
     pro = Product.objects.get(id=proid)
     context = {'pro': pro}
@@ -159,6 +162,7 @@ def addFormpro(request):
     return render(request, 'productdir/proaddForm.html',context,{'getcategory': Category.getcategory()})
 '''
 
+'''
 def addFormproo(request):
     context = {}
 
@@ -177,8 +181,9 @@ def addFormproo(request):
 
     context['getcategory'] = Category.getcategory()
     return render(request, 'productdir/proaddForm.html', context)
+'''
 
-
+@login_required
 def addFormpro(request):
     context = {}
 
@@ -202,7 +207,7 @@ def addFormpro(request):
     context['getcategory'] = Category.getcategory()
     return render(request, 'productdir/proaddForm.html', context)
 
-
+@login_required
 def addMetaFormPro(request):
     metaform = ProductMetaForm()
     context = {'metaform': metaform}

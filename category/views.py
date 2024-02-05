@@ -4,6 +4,7 @@ from django.views import View
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
 
 mycategorylist = [
 
@@ -57,7 +58,7 @@ def categorydetailes(request, catid):
     context = {'catgo': catgo}
     return render(request, 'categorydir/categorydetaileshtml.html', context)
 
-
+@login_required
 def addcat(request):
     if (request.method == 'POST'):
         Category.objects.create(
@@ -68,6 +69,7 @@ def addcat(request):
     return render(request, 'categorydir/cataddhtml.html')
 
 
+@login_required
 def deletecat(request, catid):
     Category.objects.filter(id=catid).delete()
     r = reverse("category_list")
@@ -91,7 +93,7 @@ def updatecat(request, catid):
     return render(request, 'categorydir/catupdate.html', context)
 '''
 
-
+@login_required
 def updatecat(request, catid):
     cat = Category.objects.get(id=catid)
     context = {'cat': cat}
@@ -114,7 +116,7 @@ def updatecat(request, catid):
 
     return render(request, 'categorydir/catupdate.html', context)
 
-
+@login_required
 def addFormcat(request):
     form = CategoryForm()
     context = {"form": form}
@@ -133,7 +135,7 @@ def addFormcat(request):
 
     return render(request, 'categorydir/cataddForm.html', context)
 
-
+@login_required
 def addMetaFormcat(request):
     metaform = CategoryMetaForm()
     context = {'metaform': metaform}
