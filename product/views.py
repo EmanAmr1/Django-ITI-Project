@@ -1,5 +1,5 @@
 from django.shortcuts import render, reverse, redirect
-from django.views.generic import UpdateView,DetailView,DeleteView,ListView
+from django.views.generic import UpdateView,DetailView,DeleteView,ListView,CreateView
 from django.views import View
 from django.urls import reverse_lazy
 # Create your views here.
@@ -241,3 +241,10 @@ class ProductGenericlist(ListView):
     model=Product
     template_name='productdir/index.html'
     context_object_name='product'
+
+
+class ProductGenericCreate(CreateView):
+    model=Product
+    template_name='productdir/proCreate.html'
+    form_class=ProductMetaForm
+    success_url=reverse_lazy('product_list')

@@ -16,4 +16,5 @@ urlpatterns = [
     path('mygenericProDetailes<pk>', ProductGenericDetails.as_view(),name="product.GenericDetails"),
     path('mygenericProDelete<pk>', ProductGenericDelete.as_view(),name="product.GenericDelete"),
     path('mygenericProList', ProductGenericlist.as_view(),name="product.GenericList"),
+    path('mygenericProCreate', ProductGenericCreate.as_view(),name="product.GenericCreate"),
 ]
