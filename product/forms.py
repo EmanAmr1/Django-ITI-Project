@@ -18,6 +18,14 @@ class ProductForm(forms.Form):
 
         return user_entered_name
     
+
+
+
+
+
+
+    
+    '''
     def save(self, commit=True):
         
         if commit:
@@ -29,7 +37,7 @@ class ProductForm(forms.Form):
             )
             return product
         return None 
-
+'''
 
 
 '''from typing import Any

@@ -136,8 +136,8 @@ def addFormpro(request):
     return render(request, 'productdir/proaddForm.html', context)
 '''
 
-
-def addFormproo(request):
+'''
+def addFormpro(request):
     form = ProductForm()
     context = {"form": form}
 
@@ -155,6 +155,26 @@ def addFormproo(request):
             context['msg'] = "name must be unique"
 
     return render(request, 'productdir/proaddForm.html',context,{'getcategory': Category.getcategory()})
+'''
+
+def addFormproo(request):
+    context = {}
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            r = reverse("product_list")
+            return HttpResponseRedirect(r)
+        else:
+            context['form'] = form
+            context['msg'] = "Name must be unique"
+    else:
+        form = ProductForm()
+        context['form'] = form
+
+    context['getcategory'] = Category.getcategory()
+    return render(request, 'productdir/proaddForm.html', context)
 
 
 def addFormpro(request):
@@ -163,7 +183,11 @@ def addFormpro(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            Product.objects.create(
+                name=form.cleaned_data['name'],
+                image=form.cleaned_data['image'],
+                category_id=form.cleaned_data['category']
+            )
             r = reverse("product_list")
             return HttpResponseRedirect(r)
         else:
