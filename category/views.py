@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-
+from django.views import View
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
@@ -143,3 +143,29 @@ def addMetaFormcat(request):
             metaform.save()
             return redirect(reverse("category_list"))
     return render(request, 'categorydir/cataddMetaForm.html', context)
+
+'''
+def genericUpdate(request, catid):
+    metaform = CategoryMetaForm(instance=Category.objects.get(id=catid))
+    context = {'metaform': metaform}
+    if (request.method == 'POST'):
+        metaform = CategoryMetaForm(
+            request.POST, request.FILES, instance=Category.objects.get(id=catid))
+        if (metaform.is_valid()):
+            metaform.save()
+            return redirect(reverse("category_list"))
+    return render(request, 'categorydir/metacatupdate.html', context)
+'''
+
+class CategoryClassbasedUpdate(View):
+    def get(self, request,id):
+        metaform = CategoryMetaForm(instance=Category.objects.get(id=id))
+        context = {'metaform': metaform}
+        return render(request, 'categorydir/metacatupdate.html', context)
+
+    def post(self, request,id):
+        metaform = CategoryMetaForm(
+            request.POST, request.FILES, instance=Category.objects.get(id=id))
+        if (metaform.is_valid()):
+            metaform.save()
+            return redirect(reverse("category_list"))

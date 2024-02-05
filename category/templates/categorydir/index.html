@@ -33,7 +33,7 @@
     <div class="all"><a class="add" href="{%url 'category.add'%}">New category</a></div> 
     <div class="all"><a class="add" href="{%url 'category.addForm'%}">New addForm Product</a></div>
     <div class="all"><a class="add" href="{%url 'category.addMetaForm'%}">New addmetaForm Product</a></div>
-    
+
 
     {% if mycategorylist %}
     <table border="5">
@@ -55,6 +55,8 @@
                     <td ><a href="{% url 'category.detailes' cat.id%}">Show details</a>
                         <a href="{% url 'category.delete' cat.id%}">Delete</a>
                         <a href="{% url 'category.update' cat.id%}">update</a>
+                        <a href="{% url 'category.CategoryClassbasedUpdate' cat.id%}">classbasedUpdate</a>
+                        
                     
                     </td>
                 </tr>
