@@ -11,6 +11,6 @@ urlpatterns = [
     path('update/<int:catid>', views.updatecat, name="category.update"),
     path('newForm', views.addFormcat, name="category.addForm"),
     path('newMetaForm', views.addMetaFormcat, name="category.addMetaForm"),
-    path('genericUpdate<int:id>', views.CategoryClassbasedUpdate.as_view(),
-         name="category.CategoryClassbasedUpdate"),
+    path('genericUpdate<int:id>', views.CategoryClassbasedUpdate.as_view(),name="category.CategoryClassbasedUpdate"),
+    
 ]

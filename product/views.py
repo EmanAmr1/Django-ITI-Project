@@ -1,5 +1,7 @@
-from django.shortcuts import render, reverse
-
+from django.shortcuts import render, reverse, redirect
+from django.views.generic import UpdateView,DetailView,DeleteView,ListView
+from django.views import View
+from django.urls import reverse_lazy
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
@@ -199,3 +201,43 @@ def addFormpro(request):
 
     context['getcategory'] = Category.getcategory()
     return render(request, 'productdir/proaddForm.html', context)
+
+
+def addMetaFormPro(request):
+    metaform = ProductMetaForm()
+    context = {'metaform': metaform}
+    if (request.method == 'POST'):
+        metaform = ProductMetaForm(request.POST, request.FILES)
+        if (metaform.is_valid()):
+            metaform.save()
+            return redirect(reverse("product_list"))
+    return render(request, 'productdir/proddMetaForm.html', context)
+
+
+#implement the same using generic method
+
+class ProductGenericUpdate(UpdateView):
+    model=Product
+    template_name='productdir/proMetaUpdate.html'
+    context_object_name='form'
+    form_class=ProductMetaForm
+    success_url=reverse_lazy('product_list')
+
+
+class ProductGenericDetails(DetailView):
+    model=Product
+    template_name='productdir/prodetaileshtml.html'
+    context_object_name='product'
+
+
+class ProductGenericDelete(DeleteView):
+    model=Product
+    template_name='productdir/proDelete.html'
+    context_object_name='product'
+    success_url=reverse_lazy('product_list')
+
+
+class ProductGenericlist(ListView):
+    model=Product
+    template_name='productdir/index.html'
+    context_object_name='product'

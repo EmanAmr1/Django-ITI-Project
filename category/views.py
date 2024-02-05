@@ -169,3 +169,7 @@ class CategoryClassbasedUpdate(View):
         if (metaform.is_valid()):
             metaform.save()
             return redirect(reverse("category_list"))
+        
+
+
+  

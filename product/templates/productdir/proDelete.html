@@ -1,0 +1,116 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .text {
+            max-width: 400px;
+            padding: 0 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .myimg {
+            width: 50%;
+            height: 50%;
+        }
+
+        .delete-btn,
+        .cancel-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover,
+        .cancel-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .cancel-btn {
+            background-color: #3498db;
+        }
+
+        .cancel-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">
+            <h1>{{ product.name }} Details</h1>
+            <p>ID: {{ product.id }}</p>
+            <p>Name: {{ product.name }}</p>
+            <form method="post" action="{% url 'product.GenericDelete' product.id%}">
+                {% csrf_token %}
+                <input type="submit" class="delete-btn" value="are you sure to delete ?">
+
+            </form>
+            <form method="post" action="{% url 'product_list' %}">
+                {% csrf_token %}
+                <input type="submit" class="cancel-btn" value="Cancel">
+            </form>
+
+        </div>
+        <img class="myimg" src="{{product.getimageurl}}" alt="{{ product.name }}  Image">
+
+
+
+        <!--<img src="{% static product.image %}" alt="{{ product.name }} Image">-->
+    </div>
+
+
+</body>
+
+</html>

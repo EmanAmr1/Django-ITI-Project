@@ -29,6 +29,10 @@
         margin: 20px;
         margin-left: 130px;
     }
+
+    .mybtn{
+        margin: 10px;
+    }
 </style>
 
 
@@ -37,6 +41,7 @@
 
     <div class="all"><a class="add" href="{%url 'product.add'%}">New Product</a></div>
     <div class="all"><a class="add" href="{%url 'product.addForm'%}">New addForm Product</a></div>
+    <div class="all"><a class="add" href="{%url 'product.addMetaForm'%}">New addmetaForm Product</a></div>
     {% if myproductslist %}
     <table border="5px">
         <thead>
@@ -46,6 +51,7 @@
                 <th>Image</th>
                 <th>Category</th>
                 <th>Actions</th>
+                <th>Actions using generic method</th>
             </tr>
         </thead>
         <tbody>
@@ -57,12 +63,21 @@
                 <td>{{ product.category.name }}</td>
                 <!--<td> <img   src="{% static product.image %}" alt="{{ product.name }} Image" width="100"></td>-->
 
-                <td><a href="{% url 'product.detailes' product.id%}">Show details</a>
-                    <a href="{% url 'product.delete' product.id%}">Delete</a>
-                    <a href="{% url 'product.update' product.id%}">Update</a>
+                <td><a class="mybtn"  href="{% url 'product.detailes' product.id%}">Show details</a><br>
+                    <a  class="mybtn"  href="{% url 'product.delete' product.id%}">Delete</a><br>
+                    <a class="mybtn"   href="{% url 'product.update' product.id%}">Update</a><br>
+
+                </td>
+                <td>
+                    <a  class="mybtn"  href="{% url 'product.GenericDetails' product.id%}">generic Show details</a><br>
+                    <a class="mybtn"  href="{% url 'product.GenericDelete' product.id%}">generic Delete</a><br>
+                    <a class="mybtn"   href="{% url 'product.GenericUpdat' product.id %}">generic Update</a><br>
+                    
 
                 </td>
 
+
+                
             </tr>
             {% endfor %}
         </tbody>

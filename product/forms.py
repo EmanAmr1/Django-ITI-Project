@@ -19,7 +19,10 @@ class ProductForm(forms.Form):
         return user_entered_name
     
 
-
+class ProductMetaForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'image', 'category']
 
 
 
