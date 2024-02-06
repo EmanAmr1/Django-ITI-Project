@@ -1,5 +1,5 @@
 
-from django.urls import path
+from django.urls import path,include
 from . import views
 from .views import *
 from django.contrib.auth.decorators import login_required
@@ -19,4 +19,5 @@ urlpatterns = [
     path('mygenericProDelete<pk>',login_required(ProductGenericDelete.as_view()),name="product.GenericDelete"),
     path('mygenericProList',login_required(ProductGenericlist.as_view()),name="product.GenericList"),
     path('mygenericProCreate', login_required(ProductGenericCreate.as_view()),name="product.GenericCreate"),
+    path("API/",include("product.api.urls")),
 ]
